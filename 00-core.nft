@@ -1,0 +1,17 @@
+table inet core {
+  chain input {
+    # Priority -100: Run First
+    type filter hook input priority -100;
+    
+    # Early Drop Invalid
+    ct state invalid drop comment "early drop of invalid connections"
+    
+    # Fast Accept Established (Saves CPU)
+    ct state {established, related} accept comment "allow tracked connections"
+    
+    # System Basics
+    iif lo accept comment "allow from loopback"
+    ip protocol icmp accept comment "allow icmp"
+    meta l4proto ipv6-icmp accept comment "allow icmp v6"
+  }
+}

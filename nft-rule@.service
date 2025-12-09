@@ -1,0 +1,13 @@
+[Unit]
+Description=Dynamic NFTables Rule for %i
+After=network-pre.target
+Before=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/nft -f /etc/nftables/dynamic/%i.nft
+ExecStop=-/usr/bin/nft delete table inet %i
+
+[Install]
+WantedBy=multi-user.target
