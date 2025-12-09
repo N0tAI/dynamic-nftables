@@ -2,7 +2,7 @@ table inet block {
   chain input {
     # Priority 100: Run Last
     type filter hook input priority 100;
-    policy drop;
+    policy accept;
 
     # Rate limiting (From your original file)
     pkttype host limit rate 5/second counter reject with icmpx type admin-prohibited
