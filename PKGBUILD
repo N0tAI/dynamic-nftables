@@ -1,5 +1,5 @@
 # Maintainer: Thayen <thayen@thayen.ca>
-pkgname=nftables-custom-config
+pkgname=custom-nftables
 pkgver=1.0.0
 pkgrel=1
 pkgdesc="Modular nftables configuration with dynamic service support"
@@ -7,7 +7,7 @@ arch=('any')
 license=('MIT')
 depends=('nftables')
 source=(
-    'nftables.conf'
+    'base.conf'
     '00-core.nft'
     '10-static.nft'
     '99-catchall.nft'
@@ -20,7 +20,7 @@ sha256sums=(
 
 package() {
     # 1. Install the Main Loader
-    install -Dm644 "$srcdir/nftables.conf" "$pkgdir/etc/nftables/nftables.conf"
+    install -Dm644 "$srcdir/base.conf" "$pkgdir/etc/nftables/base.conf"
 
     # 2. Install Base Rules (into /etc/nftables/static/)
     install -Dm644 "$srcdir/00-core.nft" "$pkgdir/etc/nftables/static/00-core.nft"
@@ -39,7 +39,7 @@ package() {
 
     # 6. Safety: Prevent overwriting your live config on update
     backup=(
-        'etc/nftables/nftables.conf'
+        'etc/nftables/base.conf'
         'etc/nftables/static/00-core.nft'
         'etc/nftables/static/10-static.nft'
         'etc/nftables/static/99-catchall.nft'
