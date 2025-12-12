@@ -1,0 +1,19 @@
+[Unit]
+Description=Dynamic Nftables Forward Rule for %i
+After=network-pre.target
+Before=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+
+ExecStartPre=/usr/bin/nft add chain inet global dynfwd-%i
+ExecStart=/bin/sh -c 'echo "table inet global { chain dynfwd-%i { include \"/etc/nftables/dynamic/%i.nft\"; } }" | /usr/bin/nft -f -'
+ExecStartPost=/usr/bin/nft add rule inet global dynamic_forward jump dynfwd-%i
+
+ExecStop=/usr/bin/nft delete rule inet global dynamic_forward jump dynfwd-%i
+ExecStop=/usr/bin/nft flush chain inet global dynfwd-%i
+ExecStop=/usr/bin/nft delete chain inet global dynfwd-%i
+
+[Install]
+WantedBy=multi-user.target

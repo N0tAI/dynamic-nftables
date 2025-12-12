@@ -11,13 +11,15 @@ source=(
     '10-sshd.nft'
     '50-dynamic-rules.nft'
     '99-catchall.nft'
-    'nft-rule@.service'
+    'nft-input-rule@.service'
+    'nft-output-rule@.service'
+    'nft-forward-rule@.service'
     'nftables-dropin.conf'
     'gen-nftable'
     'nftables-runtime.conf'
 )
 sha256sums=(
-    'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP'
+    'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP'
 )
 
 package() {
