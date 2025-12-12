@@ -1,9 +1,0 @@
-table inet static {
-  chain input {
-    # Priority 0: Standard Services
-    type filter hook input priority 0;
-    
-    # SSH (From your original file)
-    tcp dport ssh accept comment "allow sshd"
-  }
-}

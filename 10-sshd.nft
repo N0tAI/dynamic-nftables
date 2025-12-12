@@ -1,0 +1,2 @@
+add rule inet global input tcp dport ssh accept comment "allow sshd"
+

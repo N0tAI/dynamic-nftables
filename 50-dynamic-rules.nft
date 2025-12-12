@@ -1,0 +1,3 @@
+add rule inet global input jump dynamic_input
+add rule inet global output jump dynamic_output
+add rule inet global forward jump dynamic_forward

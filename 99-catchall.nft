@@ -1,19 +1,3 @@
-table inet block {
-  chain input {
-    # Priority 100: Run Last
-    type filter hook input priority 100;
-    policy accept;
-
-    # Rate limiting (From your original file)
-    pkttype host limit rate 5/second counter reject with icmpx type admin-prohibited
-    
-    # Visibility
-    counter
-  }
-
-  chain forward {
-    # Ensure we block forwarding as per your original file
-    type filter hook forward priority 100;
-    policy drop;
-  }
-}
+add rule inet global input pkttype host limit rate 5/second counter reject with icmpx type admin-prohibited
+add rule inet global input counter
+add rule inet global input drop
