@@ -49,5 +49,7 @@ EOF
 
 # Output includes sorted by filename to ensure 00- comes before 99-
 for name in $(printf '%s\n' "${!unique_rules[@]}" | sort); do
-    echo "include \"${unique_rules[$name]}\""
+    echo $'\n'"### Begin ${unique_rules[$name]}"$'\n'
+    cat "${unique_rules[$name]}"
+    echo $'\n'"### End ${unique_rules[$name]}"
 done

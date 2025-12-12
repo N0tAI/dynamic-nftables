@@ -1,3 +1,3 @@
 add rule inet global input pkttype host limit rate 5/second counter reject with icmpx type admin-prohibited
 add rule inet global input counter
-add rule inet global input drop
+add rule inet global drop
