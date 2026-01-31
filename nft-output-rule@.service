@@ -1,7 +1,10 @@
 [Unit]
 Description=Dynamic Nftables Output Rule for %i
 After=network-pre.target
+After=nftables.service
 Before=network.target
+BindsTo=nftables.service
+ReloadPropagatedFrom=nftables.service
 
 [Service]
 Type=oneshot
